@@ -1,0 +1,80 @@
+*
+{
+    /* border: 1px solid red; */
+}
+
+html
+{
+    /* background-color: rgb(255, 86, 1); */
+    background-color: white;
+}
+
+body
+{
+    height: 300px;
+    width: 300px;
+    background-color: black;
+    color: white;
+    border: 3px solid rgb(255, 86, 1);
+    border-radius: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content
+{
+    
+}
+
+.match-confirm
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-confirm__button
+{
+
+    border: 1px solid red;
+    border-radius: 25px;
+    height: 50px;
+    width: 100px;
+    box-shadow: 0 0 3px 3px red;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.match-confirm__button-state
+{
+    box-sizing: border-box;
+    border-radius: 25px;
+    color: rgb(255, 86, 1);
+    background-color: white;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: -1px;
+    transition: 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.match-confirm__button-state:hover
+{
+    cursor: pointer;
+}
+
+.match-confirm__text
+{
+    margin: 15px;
+}
+
+.match-confirm__text-state
+{
+    color: red;
+}

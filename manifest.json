@@ -1,6 +1,6 @@
 {
     "name": "Faceit extencion",
-    "description": "Confirm faceit match",
+    "description": "Confirm faceit match and a few minor features",
     "version": "1.0",
     "manifest_version": 3,
     "icons": {
@@ -15,6 +15,6 @@
     },
     "permissions": ["scripting", "activeTab"],
     "background":{
-        "service_worker": "app.js"
+        "service_worker": "scripts/app.js"
     }
 }
