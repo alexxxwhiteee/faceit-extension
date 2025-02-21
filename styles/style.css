@@ -7,6 +7,7 @@ html
 {
     /* background-color: rgb(255, 86, 1); */
     background-color: white;
+    font-family: "Overpass", sans-serif;
 }
 
 body
@@ -38,7 +39,6 @@ body
 
 .match-confirm__button
 {
-
     border: 1px solid grey;
     border-radius: 25px;
     height: 50px;
@@ -78,4 +78,5 @@ body
     font-size: 10px;
     color: rgb(152, 152, 152);
     transition: 0.5s ease-in-out;
+    font-weight: 700;
 }
