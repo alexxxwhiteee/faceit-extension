@@ -1,13 +1,12 @@
-
+(function (){
 let globalObserver = null
 
 let autoClickEnabled = false
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'receiveValue') {
     autoClickEnabled = message.value
-    console.log(message.value)
-    console.log(autoClickEnabled)
+    localStorage.setItem('autoClick', message.value)
     watchStatus(autoClickEnabled)
   }
 });
@@ -15,14 +14,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 
 function watchStatus(value) {
-  if (value === true) {
-    console.log('TRUE');
+  if (value === true || localStorage.getItem('autoClick') == 'true') {
+    console.log('TRUE')
+    localStorage.setItem('autoClick', 'true')
     if (globalObserver) {
       return;
     }
-    function handleMutation(mutationsList, observer) {
+    function handleMutation(mutationsList) {
       for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
+        if (mutation.type === 'childList' || mutation.type === 'substree' || mutation.type === 'attributes' || mutation.type === 'characterData') {
           for (const addedNode of mutation.addedNodes) {
             if (
               addedNode instanceof HTMLElement &&
@@ -38,17 +38,15 @@ function watchStatus(value) {
       }
     }
     globalObserver = new MutationObserver(handleMutation);
-    globalObserver.observe(document.body, { childList: true, subtree: true });
-  } else if (value === false) {
-    console.log('FALSE');
+    globalObserver.observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
+  } else if (value === false || localStorage.getItem('autoClick') == 'false') {
+    console.log('FALSE')
+    localStorage.setItem('autoClick', 'false')
     if (globalObserver) {
       globalObserver.disconnect();
       globalObserver = null;
     }
   }
 }
-
-chrome.storage.local.get(['autoClickEnabled'], (result) => {
-  autoClickEnabled = result.autoClickEnabled || false;
-  watchStatus(autoClickEnabled)
-});
+watchStatus()
+})()
