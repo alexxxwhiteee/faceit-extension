@@ -1,49 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('autoClick') == 'true'){
-      sliderEnabled()
+    if (localStorage.getItem('matchConfirmation') == 'true'){
+      matchConfirmationEnabled()
       } else {
-      sliderDisabled()
+      matchConfirmationDisabled()
+    }
+    if (localStorage.getItem('advancedStatistic') == 'true'){
+      advancedStatisticEnabled()
+      } else {
+      advancedStatisticDisabled()
     }
   });
   
-  const div = document.getElementById("btn-div")
-  const slider = document.getElementById("slider")
-  const text = document.getElementById("text")
+  const matchSlider = document.getElementById("match")
+  const matchSliderState = document.getElementById("match-state")
   
-  slider.addEventListener("click", function () {
-      if (localStorage.getItem('autoClick') == 'false'){
-        sliderEnabled()
-        messageTrue()
+  matchSliderState.addEventListener("click", function () {
+      if (localStorage.getItem('matchConfirmation') == 'false'){
+        matchConfirmationEnabled()
       } else {
-        sliderDisabled()
-        messageFalse()
+        matchConfirmationDisabled()
       }
     })
     
-    function sliderEnabled(){
-      localStorage.setItem('autoClick', 'true')
-      slider.style.left = '99px'
-      text.style.left = '110px'
-      div.style.boxShadow = '0 0 3px 3px rgb(255, 86, 1), inset 0 0 10px grey';
-      div.style.border = '1px solid rgb(255, 86, 1)';
-      text.innerText = 'ENABLED';
-      text.style.color = 'rgb(255, 86, 1)';
-  }
-
-  function messageTrue(){
-    chrome.runtime.sendMessage({ action: 'setValue', value: true });
+    function matchConfirmationEnabled(){
+      localStorage.setItem('matchConfirmation', 'true')
+      matchSliderState.style.left = '30px'
+      matchSlider.style.boxShadow = '0 0 3px 3px rgb(255, 86, 1), inset 0 0 5px rgb(255, 86, 1)';
+      chrome.runtime.sendMessage({ action: 'matchConfirmation', value: true });
   }
   
-  function sliderDisabled(){
-      localStorage.setItem('autoClick', 'false')
-      slider.style.left = '-1px'
-      text.style.left = '150px'
-      div.style.boxShadow = '0 0 3px 3px grey, inset 0 0 10px grey';
-      div.style.border = '1px solid grey';
-      text.innerText = 'DISABLED';
-      text.style.color = 'rgb(152, 152, 152)';
+  function matchConfirmationDisabled(){
+      localStorage.setItem('matchConfirmation', 'false')
+      matchSliderState.style.left = '0px'
+      matchSlider.style.boxShadow = '0 0 3px 3px grey, inset 0 0 5px grey';
+      chrome.runtime.sendMessage({ action: 'matchConfirmation', value: false });
   }
 
-  function messageFalse(){
-    chrome.runtime.sendMessage({ action: 'setValue', value: false });
+  const statisticSlider = document.getElementById("statistic")
+  const statisticSliderState = document.getElementById("statistic-state")
+  
+  statisticSliderState.addEventListener("click", function () {
+      if (localStorage.getItem('advancedStatistic') == 'false'){
+        advancedStatisticEnabled()
+      } else {
+        advancedStatisticDisabled()
+      }
+    })
+    
+    function advancedStatisticEnabled(){
+      localStorage.setItem('advancedStatistic', 'true')
+      statisticSliderState.style.left = '30px'
+      statisticSlider.style.boxShadow = '0 0 3px 3px rgb(255, 86, 1), inset 0 0 5px rgb(255, 86, 1)';
+      chrome.runtime.sendMessage({ action: 'advancedStatistic', value: true });
+  }
+  
+  function advancedStatisticDisabled(){
+      localStorage.setItem('advancedStatistic', 'false')
+      statisticSliderState.style.left = '0px'
+      statisticSlider.style.boxShadow = '0 0 3px 3px grey, inset 0 0 5px grey';
+      chrome.runtime.sendMessage({ action: 'advancedStatistic', value: false });
   }

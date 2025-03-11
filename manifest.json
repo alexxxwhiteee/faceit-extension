@@ -13,13 +13,14 @@
         "default_title": "Faceit extencion",
         "default_popup": "index.html"
     },
-    "host_permissions": [ "https://www.faceit.com/*" ],
+    "host_permissions": [ "https://www.faceit.com/*", "https://open.faceit.com/*" ],
     "permissions": ["storage", "tabs", "scripting", "activeTab"],
     "background": {
         "service_worker": "scripts/background.js"
       },
     "content_scripts" : [ {
         "matches" : [ "https://www.faceit.com/*" ],
+        "css": ["styles/contentScriptStyles.css"],
         "js" : [ "scripts/contentScript.js" ] 
         } ]
 }
