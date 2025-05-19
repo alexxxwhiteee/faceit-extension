@@ -7,9 +7,42 @@
     <script src="scripts/app.js" defer></script>
   </head>
   <body>
-    <div class="content">
-      CONTENT
+
+    <button class="info">i</button>
+
+    <div class="loader">
+      <div class="loader__sircle">
+      </div>
+      <div class="loader__text">
+        Loading
+      </div>
     </div>
+
+    <div class="user">
+
+      <div class="user__lvl">
+        <img id="user__img" class="user__img" src="skillLvlImages/10.svg" alt="skill-lvl"/>
+      </div>
+
+      <div class="user__details">
+
+        <div id="user__name" class="user__name">
+          OldSchool
+        </div>
+
+        <div class="user__skill">
+          <div class="user__elo-img">
+            <img class="user__dots-img" src="skillLvlImages/elo.svg" alt="elo-img"/>
+          </div>
+          <div id="user__elo-text" class="user__elo-text">
+            1740
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
     <div class="settings">
       <div class="match-confirm">
         <div class="match-confirm__text">Match confirmation</div>
@@ -21,6 +54,12 @@
         <div class="statistic__text">Advanced statistics</div>
         <div id="statistic" class="statistic__button">
           <div id="statistic-state" class="statistic__button_state"></div>
+        </div>
+      </div>
+      <div class="colored-statistic">
+        <div class="colored-statistic__text">Colored statistics</div>
+        <div id="colored-statistic" class="colored-statistic__button">
+          <div id="colored-statistic-state" class="colored-statistic__button_state"></div>
         </div>
       </div>
     </div>

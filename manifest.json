@@ -22,5 +22,11 @@
         "matches" : [ "https://www.faceit.com/*" ],
         "css": ["styles/contentScriptStyles.css"],
         "js" : [ "scripts/contentScript.js" ] 
-        } ]
+        } ],
+    "web_accessible_resources": [
+            {
+              "resources": ["skillLvlImages/*.svg"],
+              "matches": ["https://www.faceit.com/*"]
+            }
+          ]
 }

@@ -5,33 +5,154 @@
 
 html
 {
-    /* background-color: rgb(255, 86, 1); */
-    background-color: white;
     font-family: "Overpass", sans-serif;
 }
 
 body
 {
-    height: 200px;
-    width: 250px;
-    background-color: black;
+    height: 300px;
+    width: 350px;
+    background-image: url("../images/topographic-pattern.jpg");
+    background-size: cover;
+    background-position: center;
     color: white;
-    border: 3px solid rgb(255, 0, 0);
-    border-radius: 20px;
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-.content
+.info
 {
-    height: 60%;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(182, 182, 182);
+    border: 1.5px solid rgb(182, 182, 182);
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.loader
+{
+    height: 55%;
+    width: 55%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loader__text
+{
+    position: absolute;
+    font-size: 17px;
+}
+
+.loader__sircle
+{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid rgb(255, 86, 1);
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.user
+{
+    display: flex;
+    height: 45%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user__lvl
+{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.user__img
+{
+    height: 100%;
+    width: 100%;
+}
+
+.user__details
+{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user__name
+{
+    height: 50%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.user__skill
+{
+    height: 45%;
+    display: flex;
+    flex-direction: row;
+}
+
+.user__elo-img
+{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px 0 10px;
+}
+
+.user__dots-img
+{
+    height: 120%;
+}
+
+.user__elo-text
+{
+    height: 100%;
+    width: 60%;
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 
 .settings
 {
-    height: 40%;
+    height: 50%;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,9 +160,11 @@ body
 }
 
 .match-confirm,
-.statistic
+.statistic,
+.colored-statistic
 {
     width: 85%;
+    margin: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -49,14 +172,18 @@ body
 }
 
 .match-confirm__text,
-.statistic__text
+.statistic__text,
+.colored-statistic__text
 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
+    display: flex;
+    cursor: pointer;
 }
 
 .match-confirm__button,
-.statistic__button
+.statistic__button,
+.colored-statistic__button
 {
     border-radius: 25px;
     height: 20px;
@@ -67,7 +194,8 @@ body
 }
 
 .match-confirm__button_state,
-.statistic__button_state
+.statistic__button_state,
+.colored-statistic__button_state
 {
     border-radius: 25px;
     background-color: white;
@@ -81,7 +209,8 @@ body
 }
 
 .match-confirm__button_state:hover,
-.statistic__button_state:hover
+.statistic__button_state:hover,
+.colored-statistic__button_state:hover
 {
     cursor: pointer;
 }

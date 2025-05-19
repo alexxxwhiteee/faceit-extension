@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
       advancedStatisticDisabled()
     }
+    if (localStorage.getItem('coloredStatistic') == 'true'){
+      coloredStatisticEnabled()
+      } else {
+      coloredStatisticDisabled()
+    }
   });
   
   const matchSlider = document.getElementById("match")
@@ -60,3 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
       statisticSlider.style.boxShadow = '0 0 3px 3px grey, inset 0 0 5px grey';
       chrome.runtime.sendMessage({ action: 'advancedStatistic', value: false });
   }
+
+  const coloredStatisticSlider = document.getElementById("colored-statistic")
+  const coloredStatisticSliderState = document.getElementById("colored-statistic-state")
+  
+  coloredStatisticSliderState.addEventListener("click", function () {
+      if (localStorage.getItem('coloredStatistic') == 'false'){
+        coloredStatisticEnabled()
+      } else {
+        coloredStatisticDisabled()
+      }
+    })
+    
+    function coloredStatisticEnabled(){
+      localStorage.setItem('coloredStatistic', 'true')
+      coloredStatisticSliderState.style.left = '30px'
+      coloredStatisticSlider.style.boxShadow = '0 0 3px 3px rgb(255, 86, 1), inset 0 0 5px rgb(255, 86, 1)';
+      chrome.runtime.sendMessage({ action: 'coloredStatistic', value: true });
+  }
+  
+  function coloredStatisticDisabled(){
+      localStorage.setItem('coloredStatistic', 'false')
+      coloredStatisticSliderState.style.left = '0px'
+      coloredStatisticSlider.style.boxShadow = '0 0 3px 3px grey, inset 0 0 5px grey';
+      chrome.runtime.sendMessage({ action: 'coloredStatistic', value: false });
+  }
+
+  
