@@ -62,11 +62,22 @@ body
 .settings-info
 {
     display: none;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1500;
+}
+
+.info-text
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px 0 20px;
 }
 
 .settings-info

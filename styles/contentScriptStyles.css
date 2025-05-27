@@ -33,9 +33,7 @@
     right: 0px;
     order: 5;
     margin-right: 0;
-    
     background-color: rgb(255, 86, 1);
-    /* border: 1px solid #4a4a4a; */
     border: none;
     background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.25) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.25) 75%, transparent 75%, transparent);
     font-size: 30px;
@@ -117,12 +115,6 @@
     color: red;
     margin-right: 3px;
 }
-
-
-
-
-
-
 
 @media screen and (max-width: 767px)
 {

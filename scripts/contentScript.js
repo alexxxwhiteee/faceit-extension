@@ -2,6 +2,7 @@
 
   async function faceitData(name) {
 
+    try{
       const apiKey = "8b5747dd-a92d-4aaa-b2a1-b12d4cc299f0";
       
       const url = `https://open.faceit.com/data/v4/players?nickname=${name}`;
@@ -42,10 +43,10 @@
             Kills,
             Deaths
           });
-          // console.log(allPlayersData)
       } 
     
-    }
+    } catch {}
+}
 
 let allPlayersData = {};
 
@@ -156,9 +157,6 @@ function statisticStatus(value) {
                 let userSideSection = document.createElement("div")
                 userSideSection.className = 'userSideStatSection'
 
-                // localStorage.setItem('userLvl', 5)
-                // localStorage.setItem('userElo', 1337)
-
                 let userElo = localStorage.getItem('userElo')
                 if (!userElo){
                   userSideSection.style.height = '30px';
@@ -188,14 +186,19 @@ function statisticStatus(value) {
                 }
               }
 
+              let matchFeedback = addedNode.getElementsByClassName('MatchFeedback__Container-sc-c68a8b2-0')[0];
+              if (matchFeedback){
+                checkUser()
+              }
+
 
                   (async () => {
                   
 
                   let playersNames = addedNode.getElementsByClassName('Nickname__Container-sc-20a28656-0');
                   let playersBars = addedNode.getElementsByClassName('ListContentPlayer__Background-sc-b2e37a95-0');
-                  let playersCardsHover = addedNode.getElementsByClassName('ListContentPlayer__Holder-sc-b2e37a95-1')
-                  let playersCards = addedNode.getElementsByClassName('RosterPlayer__PlayerCardContainer-sc-ca577666-11')
+                  let playersCardsHover = addedNode.getElementsByClassName('ListContentPlayer__Holder-sc-b2e37a95-1');
+                  let playersCards = addedNode.getElementsByClassName('styles__PlayerCardContainer-sc-80dd83a9-11');
                   let namesArray = []
                   if (playersNames.length > 0 && playersBars.length > 0 && playersCardsHover.length > 0 && playersCards.length > 0) {
                   for (let i = 0; i<10; i++){
@@ -217,6 +220,8 @@ function statisticStatus(value) {
                     let name = playersNames[i].firstElementChild.textContent
                     namesArray.push(name)
 
+                  const playerAdded = playerBar.querySelector('.playerMatches')
+                    if (!playerAdded){
                     let playerMatches = document.createElement("div")
                       playerMatches.className = 'playerMatches'
 
@@ -224,6 +229,7 @@ function statisticStatus(value) {
                         loader.className = 'loader'
                         playerMatches.appendChild(loader)
                         playerBar.appendChild(playerMatches)
+                    }
                   }
 
                   
@@ -239,7 +245,7 @@ function statisticStatus(value) {
                       let playerBar = playersBars[i].lastElementChild
 
                       if (allPlayersData[name]) {
-                        const loader = playerBar.querySelector('.loader');
+                        const loader = playerBar.querySelector('.loader')
                         loader.remove()
                         playerBar.style.zIndex = '1100'
                       for (let j=0; j<5; j++){
@@ -258,7 +264,7 @@ function statisticStatus(value) {
                       }
                     } 
                 } 
-              }
+              } else {console.log('CLASS CHANGED')}
             })()
             }
           }
@@ -338,14 +344,70 @@ matchConfirmationStatus()
 statisticStatus()
 coloredStatistic()
 
-function checkUser(){
+async function checkUser(){
+
   let userName = localStorage.getItem('userName')
-  // let userElo = localStorage.getItem('userElo')
-  // let userLvl = localStorage.getItem('userLvl')
 
-  chrome.runtime.sendMessage({ action: 'userName', value: userName })
-
+  try {
+  const apiKey = "8b5747dd-a92d-4aaa-b2a1-b12d4cc299f0";
+  const url = `https://open.faceit.com/data/v4/players?nickname=${userName}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${apiKey}`
+    }
+  });
+  const data = await response.json();
   
+  if (Object.keys(data).length > 1){
+   
+  const newUserLvl = data.games.cs2.skill_level
+  const newUserElo = data.games.cs2.faceit_elo
+
+  const userElo = localStorage.getItem('userElo')
+  
+  if (newUserElo != userElo){
+
+  localStorage.setItem('userLvl', newUserLvl);
+  localStorage.setItem('userElo', newUserElo);
+  
+  let sideStat = document.getElementsByClassName('userSideStatSection')[0];
+  if (sideStat){
+  sideStat.replaceChildren()
+  sideStat.style.height = '30px';
+  sideStat.style.justifyContent = 'space-around';
+  const userLoader = document.createElement("div")
+  userLoader.className = 'user-loader'
+  sideStat.appendChild(userLoader)
+
+  setTimeout(() => {
+
+    const loader = document.querySelector('.user-loader');
+    loader.remove()
+
+    let skillLvl = localStorage.getItem('userLvl')
+    let elo = localStorage.getItem('userElo')
+    sideStat.style.height = '80px';
+    sideStat.style.justifyContent = 'space-between';
+
+    const skillLvlImg = document.createElement("img")
+    skillLvlImg.src = chrome.runtime.getURL(`skillLvlImages/${skillLvl}.svg`)
+    skillLvlImg.className = 'skill-lvl-img'
+    sideStat.appendChild(skillLvlImg)
+
+    const eloLvl = document.createElement("div")
+    eloLvl.className = 'elo-lvl'
+    eloLvl.innerText = `${elo}`
+    sideStat.appendChild(eloLvl)
+
+   }, 1000)
+  
+  }
+}
+}
+} catch {}
+  chrome.runtime.sendMessage({ action: 'userName', value: userName })
 
 }
 

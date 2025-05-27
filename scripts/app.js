@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+const firstTurningOn = localStorage.getItem('matchConfirmation')
+if (firstTurningOn == null){
+  matchConfirmationEnabled()
+  advancedStatisticEnabled()
+  coloredStatisticEnabled()
+}
+})
+
+document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('matchConfirmation') == 'true'){
       matchConfirmationEnabled()
       } else {
@@ -116,8 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function checkUser() {
     
-
+    try{
      let name = localStorage.getItem('userName')
+     if(name){
     
 
     const apiKey = "8b5747dd-a92d-4aaa-b2a1-b12d4cc299f0";
@@ -158,6 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
   }
+} catch {}
+}
 
 const infoButton = document.getElementById("i-button")
 
@@ -174,9 +186,20 @@ delInfoButton.addEventListener("click", function () {
 })
 
 const infoMap = {
-  "match-confirm__text": "Информация для Option 1",
-  "statistic__text": "Info for Option 2",
-  "colored-statistic__text": "Информация для Option 3"
+  "match-confirm__text": {
+    title: "Match confirm",
+    body: "You want accept match?"
+  },
+
+  "statistic__text": {
+    title: "Statistic",
+    body: "Here is your statistic"
+  },
+
+  "colored-statistic__text": {
+    title: "Color",
+    body: "Your color"
+  },
 };
 
 for (const key in infoMap) {
@@ -184,7 +207,26 @@ for (const key in infoMap) {
     element.addEventListener('click', function () {
       const infoDiv = document.getElementById("settings-info")
       infoDiv.style.display = 'flex'
-      infoDiv.innerText = infoMap[key]
+
+      const lastTextDiv = infoDiv.querySelector('.info-text');
+      if (lastTextDiv) {
+        lastTextDiv.remove();
+      }
+
+      const textDiv = document.createElement("div");
+      textDiv.className = "info-text";
+      
+      
+      
+      const title = document.createElement("h3");
+      title.textContent = infoMap[key].title;
+      textDiv.appendChild(title);
+
+      const text = document.createElement("p");
+      text.textContent = infoMap[key].body;
+      textDiv.appendChild(text);
+
+      infoDiv.appendChild(textDiv)
     });
 }
 
