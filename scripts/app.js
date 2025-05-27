@@ -91,4 +91,106 @@ document.addEventListener('DOMContentLoaded', () => {
       chrome.runtime.sendMessage({ action: 'coloredStatistic', value: false });
   }
 
+  let backgroundPort = chrome.runtime.connect({ name: "popupPort" });
+
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'userName') {
+      let messageValue = message.value
+      if (messageValue != undefined){
+        localStorage.setItem('userName', message.value);
+    }
+    checkUser()
+  }
+});
+
+  backgroundPort.onMessage.addListener(message => {
+      if (message.action === 'userName') {
+        let messageValue = message.value
+      if (messageValue != undefined){
+          localStorage.setItem('userName', message.value)
+      }
+      checkUser()
+    }
+  });
+
+
+  async function checkUser() {
+    
+
+     let name = localStorage.getItem('userName')
+    
+
+    const apiKey = "8b5747dd-a92d-4aaa-b2a1-b12d4cc299f0";
+    
+    const url = `https://open.faceit.com/data/v4/players?nickname=${name}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${apiKey}`
+      }
+    });
+    const data = await response.json();
+    
+    if (Object.keys(data).length > 1){
+     
+    const userLvl = data.games.cs2.skill_level
+    const userElo = data.games.cs2.faceit_elo
+    localStorage.setItem('userLvl', userLvl);
+    localStorage.setItem('userElo', userElo);
+   
+    
+      const loader = document.getElementById("loader")
+      loader.style.display = 'none';
+
+      const user = document.getElementById("user")
+      user.style.display = 'flex';
+
+      const lvlImg = document.getElementById("user__img")
+      lvlImg.src = `skillLvlImages/${userLvl}.svg`
+
+      const userName = document.getElementById("user__name")
+      userName.innerText = `${name}`
+
+      const userSkillElo = document.getElementById("user__elo-text")
+      userSkillElo.innerText = `${userElo}`
+
+    }
   
+  }
+
+const infoButton = document.getElementById("i-button")
+
+infoButton.addEventListener("click", function () {
+  const infoDiv = document.getElementById("info")
+  infoDiv.style.display = 'flex'
+})
+
+const delInfoButton = document.getElementById("info-x-button")
+  
+delInfoButton.addEventListener("click", function () {
+  const infoDiv = document.getElementById("info")
+  infoDiv.style.display = 'none'
+})
+
+const infoMap = {
+  "match-confirm__text": "Информация для Option 1",
+  "statistic__text": "Info for Option 2",
+  "colored-statistic__text": "Информация для Option 3"
+};
+
+for (const key in infoMap) {
+  const element = document.querySelector(`.${key}`);
+    element.addEventListener('click', function () {
+      const infoDiv = document.getElementById("settings-info")
+      infoDiv.style.display = 'flex'
+      infoDiv.innerText = infoMap[key]
+    });
+}
+
+const delSetInfoButton = document.getElementById("settings-info__button")
+
+  delSetInfoButton.addEventListener("click", function () {
+  const infoDiv = document.getElementById("settings-info")
+      infoDiv.style.display = 'none'
+})

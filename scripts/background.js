@@ -1,3 +1,34 @@
+let popupPort = null;
+let lastUserName
+
+chrome.storage.local.get('userName', function(result) {
+  lastUserName = result.userName 
+});
+
+chrome.runtime.onConnect.addListener(port => {
+    if (port.name === "popupPort") {
+        popupPort = port;
+        popupPort.postMessage({ action: 'userName', value: lastUserName });
+        port.onDisconnect.addListener(() => {
+          popupPort = null;
+      });
+    }
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'userName') {
+      lastUserName = message.value;
+      chrome.storage.local.set({ userName: lastUserName });
+        if (popupPort) {
+            popupPort.postMessage({ action: 'userName', value: lastUserName });
+        } 
+        sendResponse({ status: "success" });
+    } 
+    return true;
+});
+
+
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'matchConfirmation') {
     const value = message.value;

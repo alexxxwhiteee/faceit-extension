@@ -8,9 +8,12 @@
   </head>
   <body>
 
-    <button class="info">i</button>
+    <button id="i-button" class="i-button">i</button>
+    <div id="info" class="info">
+      <button id="info-x-button" class="info-x-button">X</button>
+    </div>
 
-    <div class="loader">
+    <div id="loader" class="loader">
       <div class="loader__sircle">
       </div>
       <div class="loader__text">
@@ -18,28 +21,28 @@
       </div>
     </div>
 
-    <div class="user">
-
-      <div class="user__lvl">
-        <img id="user__img" class="user__img" src="skillLvlImages/10.svg" alt="skill-lvl"/>
-      </div>
-
-      <div class="user__details">
-
-        <div id="user__name" class="user__name">
-          OldSchool
+    <div id="user" class="user">
+      <div id="user-border" class="user-border">
+        <div class="user__lvl">
+          <img id="user__img" class="user__img" src="" alt="skill-lvl"/>
         </div>
 
-        <div class="user__skill">
-          <div class="user__elo-img">
-            <img class="user__dots-img" src="skillLvlImages/elo.svg" alt="elo-img"/>
-          </div>
-          <div id="user__elo-text" class="user__elo-text">
-            1740
-          </div>
-        </div>
+        <div class="user__details">
 
+          <div id="user__name" class="user__name">
+            <!-- user nickname -->
+          </div>
+
+          <div class="user__skill">
+            <div class="user__elo-img">
+              <img class="user__dots-img" src="skillLvlImages/elo.svg" alt="elo-img"/>
+            </div>
+            <div id="user__elo-text" class="user__elo-text">
+              <!-- user elo -->
+            </div>
+          </div>
       </div>
+    </div>
 
     </div>
 
@@ -61,6 +64,10 @@
         <div id="colored-statistic" class="colored-statistic__button">
           <div id="colored-statistic-state" class="colored-statistic__button_state"></div>
         </div>
+      </div>
+
+      <div id="settings-info" class="settings-info">
+        <button id="settings-info__button" class="settings-info__button">X</button>
       </div>
     </div>
   </body>

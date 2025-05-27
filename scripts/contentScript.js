@@ -3,7 +3,7 @@
   async function faceitData(name) {
 
       const apiKey = "8b5747dd-a92d-4aaa-b2a1-b12d4cc299f0";
-      try {
+      
       const url = `https://open.faceit.com/data/v4/players?nickname=${name}`;
       const response = await fetch(url, {
         method: "GET",
@@ -44,7 +44,7 @@
           });
           // console.log(allPlayersData)
       } 
-    } catch {}
+    
     }
 
 let allPlayersData = {};
@@ -142,6 +142,7 @@ function statisticStatus(value) {
                 if (teamPlayers){
                 let userName = teamPlayers.firstElementChild.firstElementChild.lastElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.textContent
                 localStorage.setItem('userName', userName)
+                checkUser()
                 }
                }, 3000)
 
@@ -255,7 +256,7 @@ function statisticStatus(value) {
                       playerMatch.innerHTML = `${allPlayersData[name][j].Result === '1' ? win.outerHTML : lose.outerHTML} ${allPlayersData[name][j].Kills}/${allPlayersData[name][j].Deaths}`;
                       playerBar.appendChild(playerMatch)
                       }
-                    }
+                    } 
                 } 
               }
             })()
@@ -336,4 +337,16 @@ function coloredStatistic(value) {
 matchConfirmationStatus()
 statisticStatus()
 coloredStatistic()
+
+function checkUser(){
+  let userName = localStorage.getItem('userName')
+  // let userElo = localStorage.getItem('userElo')
+  // let userLvl = localStorage.getItem('userLvl')
+
+  chrome.runtime.sendMessage({ action: 'userName', value: userName })
+
+  
+
+}
+
 })()
