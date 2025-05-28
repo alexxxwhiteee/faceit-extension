@@ -248,9 +248,14 @@ function statisticStatus(value) {
                     
                       let playerBar = playersBars[i].lastElementChild
 
+                      let playerLoader = playersBars[i]
+
                       if (allPlayersData[name]) {
-                        const loader = playerBar.querySelector('.loader')
+                        const loader = playerLoader.querySelector('.loader')
+                        if (loader){
                         loader.remove()
+                        console.log(i)
+                        }
                         playerBar.style.zIndex = '1100'
                       for (let j=0; j<5; j++){
                       let playerMatch = document.createElement("div")
@@ -268,7 +273,7 @@ function statisticStatus(value) {
                       }
                     } 
                 } 
-              } else {console.log('CLASS CHANGED')}
+              }
             })()
             }
           }
