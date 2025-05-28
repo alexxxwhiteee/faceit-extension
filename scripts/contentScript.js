@@ -100,7 +100,7 @@ function matchConfirmationStatus(value) {
               
 
                  if (localStorage.getItem('copiedIp') != 'true'){
-                let serverWindow = addedNode.getElementsByClassName('ConnectOptions__Option-sc-91da56f9-0')[0];
+                let serverWindow = addedNode.getElementsByClassName('ConnectOptions__Option-sc-92f2d119-0')[0];
                 if (serverWindow){
                 let serverIp = serverWindow.lastElementChild.lastElementChild
                   setTimeout(() => {
@@ -154,6 +154,9 @@ function statisticStatus(value) {
                 if (sideBar){
                 let sideSection = sideBar.firstElementChild
 
+                const sideSectionAdded = sideSection.querySelector('.userSideStatSection')
+                    if (!sideSectionAdded){
+
                 let userSideSection = document.createElement("div")
                 userSideSection.className = 'userSideStatSection'
 
@@ -185,8 +188,9 @@ function statisticStatus(value) {
 
                 }
               }
+            }
 
-              let matchFeedback = addedNode.getElementsByClassName('MatchFeedback__Container-sc-c68a8b2-0')[0];
+              let matchFeedback = addedNode.getElementsByClassName('MatchFeedback__Container-sc-c904d365-0')[0];
               if (matchFeedback){
                 checkUser()
               }
