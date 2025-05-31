@@ -89,7 +89,7 @@ function matchConfirmationStatus(value) {
           for (let addedNode of mutation.addedNodes) {
             // if (addedNode instanceof HTMLElement && addedNode.classList.contains(''))
             if (addedNode instanceof HTMLElement) {
-                 let matchModalWindow = addedNode.querySelector('[id^="radix-"]')
+                 let matchModalWindow = addedNode.querySelector('[id^="radix-:"]')
                  let matchButton = matchModalWindow?.lastElementChild?.firstElementChild;
                     if (matchButton) {
                   setTimeout(() => {
@@ -251,12 +251,16 @@ function statisticStatus(value) {
                       let playerLoader = playersBars[i]
 
                       if (allPlayersData[name]) {
+                        setTimeout(() => {
                         const loader = playerLoader.querySelector('.loader')
                         if (loader){
+                        
                         loader.remove()
-                        console.log(i)
+                        
                         }
-                        playerBar.style.zIndex = '1100'
+                        
+
+                      playerBar.style.zIndex = '1100'
                       for (let j=0; j<5; j++){
                       let playerMatch = document.createElement("div")
                       playerMatch.className = 'playerMatch'
@@ -269,8 +273,10 @@ function statisticStatus(value) {
                       lose.textContent = 'L'
 
                       playerMatch.innerHTML = `${allPlayersData[name][j].Result === '1' ? win.outerHTML : lose.outerHTML} ${allPlayersData[name][j].Kills}/${allPlayersData[name][j].Deaths}`;
+                      console.log(playerBar.length)
                       playerBar.appendChild(playerMatch)
                       }
+                      }, 1000)
                     } 
                 } 
               }
@@ -416,7 +422,8 @@ async function checkUser(){
 }
 }
 } catch {}
-  chrome.runtime.sendMessage({ action: 'userName', value: userName })
+
+chrome.runtime.sendMessage({ action: 'userName', value: userName })
 
 }
 
