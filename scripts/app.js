@@ -187,18 +187,18 @@ delInfoButton.addEventListener("click", function () {
 
 const infoMap = {
   "match-confirm__text": {
-    title: "Match confirm",
-    body: "You want accept match?"
+    title: "Automatic match readiness",
+    body: "Ready up for matches automatically"
   },
 
   "statistic__text": {
-    title: "Statistic",
-    body: "Here is your statistic"
+    title: "Advanced statistics",
+    body: "Shows advanced statistics for each player"
   },
 
   "colored-statistic__text": {
-    title: "Color",
-    body: "Your color"
+    title: "Colored statistics",
+    body: "Changes the player's color depending on his stats"
   },
 };
 
