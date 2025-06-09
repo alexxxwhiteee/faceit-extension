@@ -23,10 +23,10 @@
 
 <div align="center">
 
-<img src="src/assets/icons/js.png" height="40" alt="javascript">
-<img src="src/assets/icons/html.png" height="40" alt="html">
-<img src="src/assets/icons/css.png" height="40" alt="css">
-<img src="src/assets/icons/api.png" height="40" alt="api">
+<img src="icons/gh-icons/js.png" height="40" alt="javascript">
+<img src="icons/gh-icons/html.png" height="40" alt="html">
+<img src="icons/gh-icons/css.png" height="40" alt="css">
+<img src="icons/gh-icons/api.png" height="40" alt="api">
 
 </div>
 
