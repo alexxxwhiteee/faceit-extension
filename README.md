@@ -30,6 +30,9 @@
 
 <p align="center">
   <img src="images/for github/buttons.gif" width="400" alt="buttons">
+</p>
+
+<p align="center">
   <img src="images/for github/settings.gif" width="400" alt="settings">
   <img src="images/for github/info.gif" width="400" alt="info">
 </p>
