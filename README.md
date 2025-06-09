@@ -15,8 +15,11 @@
 ###
 
 <p align="center">
-  <img src="images/for github/sideGif.gif" height="400" alt="demo">
-  <img src="images/for github/userGif.gif" width="400" alt="demo">
+  <img src="images/for github/sideGif.gif" height="400" alt="side-bar">
+</p>
+
+<p align="center">
+  <img src="images/for github/userGif.gif" width="400" alt="user-bar">
 </p>
 
 ###
@@ -26,9 +29,9 @@
 ###
 
 <p align="center">
-  <img src="images/for github/buttons.gif" width="400" alt="demo">
-  <img src="images/for github/settings.gif" width="400" alt="demo">
-  <img src="images/for github/info.gif" width="400" alt="demo">
+  <img src="images/for github/buttons.gif" width="400" alt="buttons">
+  <img src="images/for github/settings.gif" width="400" alt="settings">
+  <img src="images/for github/info.gif" width="400" alt="info">
 </p>
 
 ###
